@@ -1,8 +1,10 @@
 import VPlay 2.0
 import QtQuick 2.0
+import "./common"
 
 GameWindow {
     id: gameWindow
+    property alias menuButtonBase: menuButtonBase
 
     // You get free licenseKeys from https://v-play.net/licenseKey
     // With a licenseKey you can:
@@ -17,85 +19,68 @@ GameWindow {
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
     // you can set this size to any resolution you would like your project to start with, most of the times the one of your main target device
     // this resolution is for iPhone 4 & iPhone 4S
-    screenWidth: 960
-    screenHeight: 640
+
 
     Scene {
         id: scene
-
+        Keys.forwardTo: twoAxisController
         // the "logical size" - the scene content is auto-scaled to match the GameWindow size
         width: 480
         height: 320
-
+        Image {
+            x: 0
+            y: 0
+            source: "../assets/MenuBackground.jpg"
+            width: 480
+            height: 320
+            fillMode: Image.PreserveAspectFit
+        }
         // background rectangle matching the logical scene size (= safe zone available on all devices)
         // see here for more details on content scaling and safe zone: https://v-play.net/doc/vplay-different-screen-sizes/
-        Rectangle {
-            id: rectangle
-            anchors.fill: parent
-            color: "grey"
+        Column {
+            anchors.left: parent
+            MenuButtonBase {
+                text: "Start Story"
 
-            Text {
-                id: textElement
-                // qsTr() uses the internationalization feature for multi-language support
-                text: qsTr("Hello V-Play World")
-                color: "#ffffff"
-                anchors.centerIn: parent
+            }
+            MenuButtonBase {
+                id: menuButtonBase
+                text: "Exit"
             }
 
-            MouseArea {
-                anchors.fill: parent
-
-                // when the rectangle that fits the whole scene is pressed, change the background color and the text
-                onPressed: {
-                    textElement.text = qsTr("Scene-Rectangle is pressed at position " + Math.round(mouse.x) + "," + Math.round(mouse.y))
-                    rectangle.color = "black"
-                    console.debug("pressed position:", mouse.x, mouse.y)
-                }
-
-                onPositionChanged: {
-                    textElement.text = qsTr("Scene-Rectangle is moved at position " + Math.round(mouse.x) + "," + Math.round(mouse.y))
-                    console.debug("mouseMoved or touchDragged position:", mouse.x, mouse.y)
-                }
-
-                // revert the text & color after the touch/mouse button was released
-                // also States could be used for that - search for "QML States" in the doc
-                onReleased: {
-                    textElement.text = qsTr("Hello V-Play World")
-                    rectangle.color = "grey"
-                    console.debug("released position:", mouse.x, mouse.y)
-                }
-            }
-        }// Rectangle with size of logical scene
-
-        Image {
-            id: vplayLogo
-            source: "../assets/vplay-logo.png"
-
-            // 50px is the "logical size" of the image, based on the scene size 480x320
-            // on hd or hd2 displays, it will be shown at 100px (hd) or 200px (hd2)
-            // thus this image should be at least 200px big to look crisp on all resolutions
-            // for more details, see here: https://v-play.net/doc/vplay-different-screen-sizes/
-            width: 50
-            height: 50
-
-            // this positions it absolute right and top of the GameWindow
-            // change resolutions with Ctrl (or Cmd on Mac) + the number keys 1-8 to see the effect
-            anchors.right: scene.gameWindowAnchorItem.right
-            anchors.top: scene.gameWindowAnchorItem.top
-
-            // this animation sequence fades the V-Play logo in and out infinitely (by modifying its opacity property)
-            SequentialAnimation on opacity {
-                loops: Animation.Infinite
-                PropertyAnimation {
-                    to: 0
-                    duration: 1000 // 1 second for fade out
-                }
-                PropertyAnimation {
-                    to: 1
-                    duration: 1000 // 1 second for fade in
-                }
-            }
         }
+        EntityBase {
+
+            Sprite {
+                id: name1
+                source: "../assets/name1.png"
+            }
+             TwoAxisController {
+                 id: tac
+                 inputActionPressed: ps(inputActionsToKeyCode)
+             }
+
+             MovementAnimation {
+               id: xma
+               target: parent
+               property: "x"
+
+               // outputXAxis is +1 if target is to the right, -1 when to the left and 0 when aiming towards it
+               velocity: 300*twoAxisController.xAxis
+               // alternatively, also the acceleration could be set, depends on how you want the entity to behave
+
+               // start rotating towards the target immediately, when xAxis is +1 or -1
+               running: true
+
+             }
+             MovementAnimation {
+                 id:yma
+                 target: parent
+                 property: "y"
+                 velocity: -300*twoAxisController.yAxis
+                 running: true
+             }
+            function sp() {}
 
     }
-}
+}}

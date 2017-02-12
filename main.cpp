@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     // QQmlApplicationEngine is the preferred way to start qml projects since Qt 5.2
     // if you have older projects using Qt App wizards from previous QtCreator versions than 3.1, please change them to QQmlApplicationEngine
     QQmlApplicationEngine engine;
+
     vplay.initialize(&engine);
 
     // use this during development
@@ -25,7 +26,6 @@ int main(int argc, char *argv[])
     // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
     // also see the .pro file for more details
     //  vplay.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
-
     engine.load(QUrl(vplay.mainQmlFileName()));
 
     return app.exec();

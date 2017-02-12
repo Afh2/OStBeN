@@ -1,8 +1,10 @@
 import VPlay 2.0
 import QtQuick 2.0
+import "./common"
 
 GameWindow {
     id: gameWindow
+    property alias menuButtonBase: menuButtonBase
 
     // You get free licenseKeys from https://v-play.net/licenseKey
     // With a licenseKey you can:
@@ -17,57 +19,73 @@ GameWindow {
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
     // you can set this size to any resolution you would like your project to start with, most of the times the one of your main target device
     // this resolution is for iPhone 4 & iPhone 4S
-    screenWidth: 960
-    screenHeight: 640
+
 
     Scene {
         id: scene
-
+        Keys.forwardTo: twoAxisController
         // the "logical size" - the scene content is auto-scaled to match the GameWindow size
         width: 480
         height: 320
-
+        Image {
+            x: 0
+            y: 0
+            source: "../assets/MenuBackground.jpg"
+            width: 480
+            height: 320
+            fillMode: Image.PreserveAspectFit
+        }
         // background rectangle matching the logical scene size (= safe zone available on all devices)
         // see here for more details on content scaling and safe zone: https://v-play.net/doc/vplay-different-screen-sizes/
-       Column {
+        Column {
             anchors.left: parent
-            MenuButton {
-            
+            MenuButtonBase {
+                text: "Start Story"
+
             }
-       
-       }
-        
-        Rectangle {
-            id: rectangle
-            anchors.fill: parent
-            color: "grey"
-
-            
-            MouseArea {
-                anchors.fill: parent
-
-                // when the rectangle that fits the whole scene is pressed, change the background color and the text
-                onPressed: {
-                    textElement.text = qsTr("Scene-Rectangle is pressed at position " + Math.round(mouse.x) + "," + Math.round(mouse.y))
-                    rectangle.color = "black"
-                    console.debug("pressed position:", mouse.x, mouse.y)
-                }
-
-                onPositionChanged: {
-                    textElement.text = qsTr("Scene-Rectangle is moved at position " + Math.round(mouse.x) + "," + Math.round(mouse.y))
-                    console.debug("mouseMoved or touchDragged position:", mouse.x, mouse.y)
-                }
-
-                // revert the text & color after the touch/mouse button was released
-                // also States could be used for that - search for "QML States" in the doc
-                onReleased: {
-                    textElement.text = qsTr("Hello V-Play World")
-                    rectangle.color = "grey"
-                    console.debug("released position:", mouse.x, mouse.y)
-                }
+            MenuButtonBase {
+                id: menuButtonBase
+                text: "Exit"
             }
-        }// Rectangle with size of logical scene
 
-   
+        }
+        EntityBase {
+
+            Animatedsprite {
+                id: name1
+                source: "../assets/MT.png"
+            }
+             TwoAxisController {
+                 id: tac
+                 inputActionPressed: ps(inputActionsToKeyCode)
+             }
+
+             MovementAnimation {
+               id: xma
+               target: parent
+               property: "x"
+
+               // outputXAxis is +1 if target is to the right, -1 when to the left and 0 when aiming towards it
+               velocity: 300*twoAxisController.xAxis
+               // alternatively, also the acceleration could be set, depends on how you want the entity to behave
+
+               // start rotating towards the target immediately, when xAxis is +1 or -1
+               running: true
+
+             }
+             MovementAnimation {
+                 id:yma
+                 target: parent
+                 property: "y"
+                 velocity: -300*twoAxisController.yAxis
+                 running: true
+             }
+            function sp(but) {
+            switch(but){
+            case "up":
+                name1.
+            
+            }}
+
     }
-}
+}}
