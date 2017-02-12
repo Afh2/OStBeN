@@ -28,6 +28,7 @@ Keys.forwardTo: tac
         width: 480
         height: 320
         Image {
+            id: ground
             x: 0
             y: 0
             source: "../assets/MenuBackground.jpg"
@@ -88,6 +89,8 @@ Keys.forwardTo: tac
 
                // start rotating towards the target immediately, when xAxis is +1 or -1
                running: true
+               maxPropertyValue: ground.width-26
+               minPropertyValue: 0
 
              }
              MovementAnimation {
@@ -96,7 +99,19 @@ Keys.forwardTo: tac
                  property: "y"
                  velocity: -300*tac.yAxis
                  running: true
+                 maxPropertyValue: ground.height-32
+                 minPropertyValue: 0
              }
+//             MovementAnimation {
+//                     target: parent
+//                     property: "pos"
+//                    // velocity: Qt.point(30, 10)
+//                     running: true
+
+//                     // limit the entity within the scene size
+//                     minPropertyValue: Qt.poitn(0, 0)
+//                     maxPropertyValue: Qt.point(ground.width, ground.height)
+//                   }
 
           /*  function sp(but) {
             switch(but){
