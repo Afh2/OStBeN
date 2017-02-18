@@ -168,6 +168,14 @@ GameWindow {
       }
     }
 
-
+    Timer {
+      id: hideSplashDelay
+      interval: 200
+      onTriggered: {
+          scene.opacity = 0
+          scene.visible = 0
+          scene.enabled = 0
+      }
+    }
 
 }

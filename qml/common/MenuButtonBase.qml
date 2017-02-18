@@ -20,9 +20,13 @@ Rectangle {
 
     // this handler is called when the button is clicked.
     signal clicked
-
+    FontLoader {
+        id: fl1
+        source: "1.ttf"
+    }
     Text {
         id: buttonText
+        font.family: fl1.name
         anchors.centerIn: parent
         font.pixelSize: 18
         color: "black"
