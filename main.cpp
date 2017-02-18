@@ -18,9 +18,24 @@ int main(int argc, char *argv[])
 
    // resolution[1] = 480;
   //  vplay.setContentScaleThresholds(resolution);
-    vplay.setContentScaleAndFileSelectors(4);
+   // vplay.setContentScaleAndFileSelectors(4);
     vplay.initialize(&engine);
+//    QVariantMap customThresholds;
+//         QVariantMap sdMap;
+//         sdMap["scaleThreshold"] = 1;
+//         sdMap["internalContentScaleFactor"] = 1;
+//         customThresholds["sd"] = sdMap;
+//         QVariantMap hdMap;
+//         hdMap["scaleThreshold"] = 2;
+//         hdMap["internalContentScaleFactor"] = 2;
+//         customThresholds["hd"] = hdMap;
+//         QVariantMap hd2Map;
+//         hd2Map["scaleThreshold"] = 2.8;
+//         hd2Map["internalContentScaleFactor"] = 4;
+//         customThresholds["hd2"] = hd2Map;
 
+//         vplay.setContentScaleThresholds(customThresholds);
+//         vplay.setContentScaleAndFileSelectors(4);
 
     // use this during development
     // for PUBLISHING, use the entry point below
