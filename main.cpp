@@ -14,8 +14,28 @@ int main(int argc, char *argv[])
     // QQmlApplicationEngine is the preferred way to start qml projects since Qt 5.2
     // if you have older projects using Qt App wizards from previous QtCreator versions than 3.1, please change them to QQmlApplicationEngine
     QQmlApplicationEngine engine;
+   // QVariantMap resolution;
 
+   // resolution[1] = 480;
+  //  vplay.setContentScaleThresholds(resolution);
+   // vplay.setContentScaleAndFileSelectors(4);
     vplay.initialize(&engine);
+//    QVariantMap customThresholds;
+//         QVariantMap sdMap;
+//         sdMap["scaleThreshold"] = 1;
+//         sdMap["internalContentScaleFactor"] = 1;
+//         customThresholds["sd"] = sdMap;
+//         QVariantMap hdMap;
+//         hdMap["scaleThreshold"] = 2;
+//         hdMap["internalContentScaleFactor"] = 2;
+//         customThresholds["hd"] = hdMap;
+//         QVariantMap hd2Map;
+//         hd2Map["scaleThreshold"] = 2.8;
+//         hd2Map["internalContentScaleFactor"] = 4;
+//         customThresholds["hd2"] = hd2Map;
+
+//         vplay.setContentScaleThresholds(customThresholds);
+//         vplay.setContentScaleAndFileSelectors(4);
 
     // use this during development
     // for PUBLISHING, use the entry point below
@@ -26,7 +46,7 @@ int main(int argc, char *argv[])
     // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
     // also see the .pro file for more details
     //  vplay.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
-    engine.load(QUrl(vplay.mainQmlFileName()));
 
+    engine.load(QUrl(vplay.mainQmlFileName()));
     return app.exec();
 }
