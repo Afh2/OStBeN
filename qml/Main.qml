@@ -2,6 +2,7 @@ import VPlay 2.0
 import QtQuick 2.0
 import "common"
 import "scenes"
+import "scenes/begin00"
 
 GameWindow {
     id: gameWindow
@@ -23,9 +24,14 @@ GameWindow {
     MenuScene {
         id: beginMenuScene
         onBeginStoryPressed: gameWindow.state = "yourname"
+        onStartPressed: gameWindow.state = "game"
     }
     YourNameScene {
         id: yourNameScene
+    }
+    Begin00 {
+        id: begin00
+
     }
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
@@ -54,7 +60,15 @@ GameWindow {
             name: "menu"
             PropertyChanges {target: beginMenuScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: beginMenuScene}
+        },
+        State {
+            name: "game"
+            PropertyChanges {target: begin00; opacity: 1}
+            PropertyChanges {target: gameWindow; activeScene: begin00}
+            PropertyChanges {target: entityManager; entityContainer:  begin00}
+            PropertyChanges {target: beginMenuScene; opacity: 0}
         }
+
 
     ]
 

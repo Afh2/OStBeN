@@ -2,11 +2,11 @@ import VPlay 2.0
 import QtQuick 2.0
 
 Scene {
-    width: 480
-    height: 320
+    width: 1024
+    height: 768
     opacity: 1
   Image {
    // fillMode: Image.PreserveAspectFit
-    source: "../../assets/splash.jpg"
+    source: "../../assets/img/BookwormDevelopersSplashScreen.png"
   }
 }
