@@ -2,7 +2,7 @@ import VPlay 2.0
 import QtQuick 2.0
 import "common"
 import "scenes"
-import "scenes/begin00"
+import "scenes/levels"
 
 GameWindow {
     id: gameWindow
@@ -29,8 +29,8 @@ GameWindow {
     YourNameScene {
         id: yourNameScene
     }
-    Begin00 {
-        id: begin00
+    Level00 {
+        id: level00
 
     }
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
@@ -63,9 +63,9 @@ GameWindow {
         },
         State {
             name: "game"
-            PropertyChanges {target: begin00; opacity: 1}
-            PropertyChanges {target: gameWindow; activeScene: begin00}
-            PropertyChanges {target: entityManager; entityContainer:  begin00}
+            PropertyChanges {target: level00; opacity: 1}
+            PropertyChanges {target: gameWindow; activeScene: level00}
+            PropertyChanges {target: entityManager; entityContainer:  level00}
             PropertyChanges {target: beginMenuScene; opacity: 0}
         }
 

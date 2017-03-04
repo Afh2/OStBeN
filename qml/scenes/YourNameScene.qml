@@ -2,6 +2,7 @@ import VPlay 2.0
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import "../common"
 
 Scene {
     opacity: 0
@@ -50,4 +51,16 @@ Scene {
 //        height: 320
 //      //  fillMode: Image.PreserveAspectFit
 //    }
-}}
+
+}
+    Column {
+        anchors.verticalCenter:  parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+
+        MenuButtonBase{
+            text: "Back to Menu"
+            onClicked: backToMenu()
+        }
+    }
+}

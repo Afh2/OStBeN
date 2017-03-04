@@ -30,17 +30,18 @@ EntityBase {
      TwoAxisController {
          id: tac
         // inputActionPressed: ps(inputActionsToKeyCode)
-         inputActionsToKeyCode: {
-         "up"= Qt.Key_Up
-         }
-         onInputActionPressed: {
-         if (actionName === "up") mt_bc.force = Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
-         }
+//         inputActionsToKeyCode: {
+//         "up"= Qt.Key_Up
+//         }
+//         onInputActionPressed: {
+//         if (actionName === "up") mt_bc.force = Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
+//         }
      }
 
      BoxCollider {
          id: mt_bc
          body.bullet: true
+         body.fixedRotation: true
          body.linearDamping: 10
          body.angularDamping: 15
          anchors.centerIn: parent
@@ -50,8 +51,10 @@ EntityBase {
          density: 0.02
          friction: 0.4
          restitution: 0.5
-
-
+         force: Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
+         Keys.onReleased: {
+            mt_bc.force = 0
+         }
          // this is applied every physics update tick
 
 

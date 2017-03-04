@@ -20,8 +20,7 @@ Scene {
         id: ground
         anchors.verticalCenter: parent.verticalCenter
         fillMode: Image.PreserveAspectCrop
-        source: "../../assets/MenuBackground.jpg"
-    }
+        source: "../../assets/img/0-background.jpg"
     // background rectangle matching the logical scene size (= safe zone available on all devices)
     // see here for more details on content scaling and safe zone: https://v-play.net/doc/vplay-different-screen-sizes/
     Column {
@@ -41,4 +40,5 @@ Scene {
         }
     }
 
+}
 }
