@@ -31,7 +31,6 @@ GameWindow {
     }
     Level00 {
         id: level00
-
     }
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
@@ -60,6 +59,7 @@ GameWindow {
             name: "menu"
             PropertyChanges {target: beginMenuScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: beginMenuScene}
+            PropertyChanges {target: level00; opacity: 0}
         },
         State {
             name: "game"

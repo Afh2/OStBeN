@@ -3,12 +3,26 @@ import QtQuick 2.0
 import "../../entities"
 import "../../entities/NPC"
 import "../../common"
+import "../../entities"
 
 SceneBase {
+
+        Text{
+                   id: text1
+                   color: "#88053f"
+                   text: "Hello Traveller!!! Welcome to Hell!)"
+                   font.pointSize: 16
+                   font.family: "Arial"
+                   anchors.centerIn: parent
+                   z:1
+                   visible: false
+               }
+
    id: level00
    opacity: 0
    visible: opacity > 0
    enabled: visible
+
    PhysicsWorld {
        id: world
      updatesPerSecondForPhysics: 30
@@ -16,95 +30,74 @@ SceneBase {
    Keys.forwardTo: mt.to_tac
 
    MT {
-
     id: mt
     z:1
     x: 100
-    y:100
-
-
+    y: 600
    // onContact: goToMenu()
+   }
+
+   signal goToMenu()
+
+   Beardie{
+   id: beardie
+   z:1
+   x: 600
+   y: 600
+ //  onContactOn: goToMenu()
+   onContactOn: {text1.visible = true
+   if (text1.font.pointSize<40) text1.font.pointSize++
+   }
+   onContactEnd: text1.visible= false
    }
 
     focus: true
 
 
 
+JoyStick{
+}
 
-//    EntityBase {
-//        id: entity9
-//        focus: true
-//        onFocusChanged: entity9.focus()
-//        anchors.bottom: parent.bottom
-//        height: 80
-//        width: 100
-//        BoxCollider {
-//            id: boxCollider
-//            bodyType: Body.Static
-//            // the size of the collider is the same as the one from entity by default
-//        }
 
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "brown"
-//            // this could be set to true for debugging
-//            visible: false
-//        }
-//    }
+
+        BoxCollider {
+            anchors.bottom: parent.bottom
+            height: 1
+            width: level00.width
+            id: boxCollider
+            bodyType: Body.Static
+            visible: false
+            // the size of the collider is the same as the one from entity by default
+        }
 
     AnimatedImage{
         id: background_up
-        width: parent.width
         height: parent.height*2/3 + 5
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.horizontalCenter: parent.horizontalCenter
         source: "../../../assets/img/BackgroundScene-1-1.gif"
  }
     Image {
         id: background_down
-        width: parent.width
-        height: parent.height/3
+//        width: parent.width
+//        height: parent.height/3
         source: "../../../assets/img/ground.png"
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: background_up.bottom
+
+        BoxCollider {
+            id: topCollider
+            anchors.bottom: parent.top
+            height: 0,1
+            width: parent.width
+            bodyType: Body.Static
+            visible: false
+            // the size of the collider is the same as the one from entity by default
+        }
     }
 
-    JoystickControllerHUD {
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-
-        // the joystick width is the space from the left to the start of the logical scene, so the radius is its half
-        joystickRadius: scene.x/2
-
-
-        // this allows setting custom images for the JoystickControllerHUD component
-        source: "../../assets/img/joystick_background.png"
-        thumbSource: "../../assets/img/joystick_thumb.png"
-
-
-        // this is the mapping between the output of the JoystickControllerHUD to the input of the player's TwoAxisController
-        // this is a performance improvement, to not have to bind every time the position changes
-        property variant playerTwoxisController: hero1.getComponent("TwoAxisController")
-        onControllerXPositionChanged: hero1.to_tac.xAxis = controllerXPosition;
-        onControllerYPositionChanged: hero1.to_tac.yAxis = controllerYPosition;
-    }
-//    JoystickControllerHUD {
-//        anchors.bottom: parent.bottom
-//        anchors.right: parent.right
-
-//        // the joystick width is the space from the left to the start of the logical scene, so the radius is its half
-//        joystickRadius: scene.x/2
-
-
-//        // this allows setting custom images for the JoystickControllerHUD component
-//        source: "../../assets/img/joystick_background.png"
-//        thumbSource: "../../assets/img/joystick_thumb.png"
-
-
-//        // this is the mapping between the output of the JoystickControllerHUD to the input of the player's TwoAxisController
-//        // this is a performance improvement, to not have to bind every time the position changes
-//        property variant playerTwoxisController: hero1.getComponent("TwoAxisController")
-//        onControllerXPositionChanged: hero1.to_tac.xAxis = controllerXPosition;
-//        onControllerYPositionChanged: hero1.to_tac.yAxis = controllerYPosition;
-//    }
 
 }

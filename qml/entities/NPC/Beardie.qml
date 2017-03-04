@@ -2,26 +2,30 @@ import VPlay 2.0
 import QtQuick 2.0
 
 EntityBase {
-    Rectangle {
-        width: 26 //Ширина окна
-        height: 32}
 
+    width: 26
+    height: 32
+    id: beardie
 
-    id: enemy
+    signal contactOn()
+    signal contactEnd()
 
-
-    BoxCollider {body.bullet: true
+    BoxCollider {
        // collisionTestingOnlyMode: true
 //collisionTestingOnlyMode: true
         //active: true
     //    anchors.centerIn: name2
 //categories: Box.Category2
 //collidesWith: Box.Category1
-width: 26
-height: 32
-    bodyType: body.Static
-
+    width: 26
+    height: 32
+    bodyType: Body.Static
+    visible: false
+    fixture.onBeginContact: contactOn()
+    fixture.onEndContact: contactEnd()
     }
+
+
 
 //    BoxCollider{
 //    categories: Box.Category2
@@ -36,7 +40,7 @@ height: 32
 
     AnimatedSpriteVPlay {
         running: enabled
-       id: name2
+        id: name2
         interpolate: false
         frameRate: 3
         frameCount: 3 //Количество кадров
@@ -48,12 +52,7 @@ height: 32
         frameY: 19
         source: "../../../assets/sprites/chibi.png"
 
-
         }
-    Rectangle{
-    width: 26 //Ширина окна
-    height: 32
-}
 }
 
 
