@@ -6,6 +6,8 @@ SceneBase {
     id: beginMenuScene
     signal beginStoryPressed
     signal gamePressed
+    signal levelPressed
+
     // by default, set the opacity to 0 - this will be changed from the main.qml with PropertyChanges
     opacity: 0
     // we set the visible property to false if opacity is 0 because the renderer skips invisible items, this is an performance improvement
@@ -41,6 +43,12 @@ SceneBase {
             text: "Game"
             onClicked: gamePressed()
         }
+
+        MenuButtonBase{
+            text: "Level"
+            onClicked: levelPressed()
+        }
+
     }
 
 }

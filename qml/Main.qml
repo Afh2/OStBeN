@@ -9,7 +9,6 @@ GameWindow {
     id: gameWindow
     width: 1024
     height: 768
-
     EntityManager {
       id: entityManager
     }
@@ -27,6 +26,8 @@ GameWindow {
         id: beginMenuScene
         onBeginStoryPressed: gameWindow.state = "yourname"
         onGamePressed: gameWindow.state = "game"
+        onLevelPressed: gameWindow.state = "level"
+
     }
     YourNameScene {
         id: yourNameScene
@@ -37,6 +38,11 @@ GameWindow {
         id: gameOnScene
         onGoToMenu: gameWindow.state = "menu"
     }
+    LevelScene{
+    id: levelScene
+    onGoToMenu: gameWindow.state = "menu"
+    }
+
 
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
@@ -61,18 +67,32 @@ GameWindow {
             PropertyChanges {target: yourNameScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: yourNameScene}
             PropertyChanges {target: gameOnScene; opacity: 0}
+            PropertyChanges {target: levelScene; opacity: 0}
+
         },
         State {
             name: "menu"
             PropertyChanges {target: beginMenuScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: beginMenuScene}
             PropertyChanges {target: gameOnScene; opacity: 0}
+
+
+            PropertyChanges {target: levelScene; opacity: 0}
+
         },
 
         State {
             name: "game"
             PropertyChanges {target: gameOnScene; opacity: 1; enabled: true; visible: true}
             PropertyChanges {target: gameWindow; activeScene: gameOnScene}
+            PropertyChanges {target: beginMenuScene; opacity: 0}
+            PropertyChanges {target: levelScene; opacity: 0}
+        },
+
+        State {
+            name: "level"
+            PropertyChanges {target: levelScene; opacity: 1; enabled: true; visible: true}
+            PropertyChanges {target: gameWindow; activeScene: levelScene}
             PropertyChanges {target: beginMenuScene; opacity: 0}
         }
 

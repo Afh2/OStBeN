@@ -1,39 +1,51 @@
 import VPlay 2.0
 import QtQuick 2.0
-import "../entities"
 import "../common"
+import "../entities"
+
 
 // EMPTY SCENE
 
 SceneBase {
+    id: levelScene
     opacity: 0
     signal goToMenu
 
 
-   BoxCollider{
+    MainHero {
+     id: hero1
+     x: 10
+     y: 600
+     z: 1
+     onGoOverWindow: goToMenu()
 
-   bodyType: Body.Static
-   }
-   MainHero {
-    id: hero1
-    onGoOverWindow: goToMenu()
-   // onContact: goToMenu()
-   }
-
-   Enemy{
-   id: enemy1
-   x: 700
-   y: 600
-   onContact: goToMenu()
-   }
+         MovementAnimation {
+             id:yma
+             target: parent
+             property: "y"
+             velocity: -300*tac.yAxis
+             running: enabled
+             maxPropertyValue:  levelScene.height
+             minPropertyValue: levelScene.height* 2/3
+         }
+    }
 
     Keys.forwardTo: hero1.to_tac
 
-
-    Text {
-        text: "Game-Scene"
-        color: "blue"
-        anchors.centerIn: parent
+    AnimatedImage{
+        id: background_up
+        width: parent.width
+        height: parent.height*2/3 + 5
+        anchors.horizontalCenter: parent.horizontalCenter
+        source: "../../assets/img/BackgroundScene-1-1.gif"
+ }
+    Image {
+        id: background_down
+        width: parent.width
+        height: parent.height/3
+        source: "../../assets/img/ground.png"
+        anchors.bottom: parent.bottom
+        anchors.top: background_up.bottom
     }
 
     JoystickControllerHUD {
@@ -51,11 +63,9 @@ SceneBase {
 
         // this is the mapping between the output of the JoystickControllerHUD to the input of the player's TwoAxisController
         // this is a performance improvement, to not have to bind every time the position changes
-
         property variant playerTwoxisController: hero1.getComponent("TwoAxisController")
         onControllerXPositionChanged: hero1.to_tac.xAxis = controllerXPosition;
         onControllerYPositionChanged: hero1.to_tac.yAxis = controllerYPosition;
-
     }
 
 }
