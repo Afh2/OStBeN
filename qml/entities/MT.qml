@@ -22,7 +22,6 @@ EntityBase {
         frameY: 19
         source: "../../assets/sprites/chibi.png"
         onXChanged: {
-
          mt_asv.running = false
         }
     }
