@@ -1,6 +1,5 @@
 import VPlay 2.0
 import QtQuick 2.0
-import QtQuick.Dialogs 1.2
 import "../../entities"
 import "../../entities/NPC"
 import "../../common"
@@ -8,28 +7,17 @@ import "../../entities"
 
 SceneBase {
 
-    Dialog {
-
-        id: dialogMT
-        width: 600
-        height: 500
-
-
-        contentItem: Rectangle{
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-
         Text{
                    id: text1
                    color: "#88053f"
-                   text: "Hello Traveller!!!)"
+                   text: "Hello Traveller!!! Welcome to Hell!)"
                    font.pointSize: 16
                    font.family: "Arial"
                    anchors.centerIn: parent
                    z:1
                    visible: false
                }
-}}
+
    id: level00
    opacity: 0
    visible: opacity > 0
@@ -49,6 +37,23 @@ SceneBase {
    // onContact: goToMenu()
    }
 
+    Text {
+        id: text4
+        opacity: 0
+font.pointSize: 16
+    text: "Priva"
+    x: 200
+    y:600
+    z:1
+    }
+
+    Keys.onUpPressed: {
+
+    }
+    Keys.onReleased:{
+       // mt.bc.linearVelocity = 0; text4.opacity =1;
+
+    }
    signal goToMenu()
 
    Beardie{
@@ -60,7 +65,7 @@ SceneBase {
    onContactOn: {text1.visible = true
    if (text1.font.pointSize<40) text1.font.pointSize++
    }
-  // onContactEnd: text1.visible= false
+   onContactEnd: text1.visible= false
    }
 
     focus: true
@@ -92,6 +97,8 @@ JoyStick{
  }
     Image {
         id: background_down
+//        width: parent.width
+//        height: parent.height/3
         source: "../../../assets/img/ground.png"
         anchors.left: parent.left
         anchors.right: parent.right

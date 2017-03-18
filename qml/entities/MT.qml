@@ -4,7 +4,7 @@ import QtQuick 2.0
 EntityBase {
     id: mt
     property alias to_tac: tac
-
+     property alias bc: mt_bc
 
 
     AnimatedSpriteVPlay {
@@ -22,16 +22,40 @@ EntityBase {
         frameY: 19
         source: "../../assets/sprites/chibi.png"
         onXChanged: {
+
          mt_asv.running = false
         }
     }
 
      TwoAxisController {
          id: tac
-        // inputActionPressed: ps(inputActionsToKeyCode)
-//         inputActionsToKeyCode: {
-//         "up"= Qt.Key_Up
-//         }
+       //  inputActionPressed: ps(inputActionsToKeyCode)
+        inputActionsToKeyCode: {
+         "up": Qt.Key_Up,
+             "down": Qt.Key_Down,
+                "left": Qt.Key_Left,
+                "right": Qt.Key_Right,
+         }
+        onInputActionPressed: {
+
+            if (actionName === "up")  {
+                tac.inputActionsToKeyCode= {"up": Qt.Key_Up}}
+            if (actionName === "down")  {{
+                    tac.inputActionsToKeyCode= {"down": Qt.Key_Down}}}
+            if (actionName === "left")  {{
+                    tac.inputActionsToKeyCode= {"left": Qt.Key_Left}}}
+            if (actionName === "right")  {{
+                    tac.inputActionsToKeyCode= {"right": Qt.Key_Right}}}
+        }
+         onInputActionReleased: {
+             tac.inputActionsToKeyCode= {
+              "up": Qt.Key_Up,
+                  "down": Qt.Key_Down,
+                     "left": Qt.Key_Left,
+                     "right": Qt.Key_Right,
+              }
+
+         }
 //         onInputActionPressed: {
 //         if (actionName === "up") mt_bc.force = Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
 //         }
@@ -41,8 +65,10 @@ EntityBase {
          id: mt_bc
          body.bullet: true
          body.fixedRotation: true
-         body.linearDamping: 10
-         body.angularDamping: 15
+         body.linearDamping: 0.1
+       //  body.angularDamping: 0
+      //   body.angularVelocity: 0
+
          anchors.centerIn: parent
          bodyType: body.Dynamic
          width: 26     //Ширина окна
@@ -50,10 +76,10 @@ EntityBase {
          density: 0.02
          friction: 0.4
          restitution: 0.5
-         force: Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
-         Keys.onReleased: {
-            mt_bc.force = 0
-         }
+         body.linearVelocity: Qt.point(tac.xAxis*200, -tac.yAxis*200)
+        // force: Qt.point(tac.xAxis*60000, -tac.yAxis*60000)
+     //    force: Qt.vector2d(tac.xAxis*5000,0)
+
          // this is applied every physics update tick
 
 

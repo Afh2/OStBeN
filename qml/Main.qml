@@ -6,8 +6,9 @@ import "scenes/levels"
 
 GameWindow {
     id: gameWindow
-    width: 1024
+    menuBarVPlayEnabled: false
     height: 768
+    width: 1024
     EntityManager {
       id: entityManager
     }
@@ -42,9 +43,6 @@ GameWindow {
         interval: 1000
         onTriggered: {
             splashscene.opacity = 0
-            splashscene.enabled = 0
-            splashscene.visible = 0
-            gameWindow.activeScene= beginMenuScene
             gameWindow.state = "menu"
 
         }
