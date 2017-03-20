@@ -12,18 +12,18 @@ EntityBase {
         running: enabled
         anchors.centerIn: parent
         interpolate: false
-        frameRate: 3
-        frameCount: 3 //Количество кадров
+        frameRate: 4
+        frameCount: 4 //Количество кадров
         width: mt_bc.width    //Ширина окна
         height: mt_bc.height
-        frameHeight: 32 //Высота выреза файла
-        frameWidth: 31  //Ширина выреза файла
-        frameX: 38     //С чего начинать обрезку файла
-        frameY: 19
-        source: "../../assets/sprites/chibi.png"
+        frameHeight: 156 //Высота выреза файла
+        frameWidth: 75  //Ширина выреза файла
+       // frameX: 38     //С чего начинать обрезку файла
+      //  frameY: 19
+        source: "../../assets/sprites/main.png"
         onXChanged: {
 
-         mt_asv.running = false
+        // mt_asv.running = false
         }
     }
 
@@ -71,8 +71,8 @@ EntityBase {
 
          anchors.centerIn: parent
          bodyType: body.Dynamic
-         width: 26     //Ширина окна
-         height: 32
+         width:  75   //Ширина окна
+         height: 156
          density: 0.02
          friction: 0.4
          restitution: 0.5

@@ -6,6 +6,26 @@ import "../../common"
 import "../../entities"
 
 SceneBase {
+//    Image {
+//        id: im1
+//        opacity: 0.5
+//        z:2
+//        source: "../../../assets/img/controller-3.png"
+//        anchors.left: parent.left
+//        anchors.leftMargin: 20
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: 20
+//    }
+//    Image {
+//        id: im2
+//        opacity: 0.5
+//        z:2
+//        source: "../../../assets/img/pads-1.png"
+//        anchors.right: parent.right
+//        anchors.rightMargin: 20
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: 20
+//    }
 
         Text{
                    id: text1
@@ -73,6 +93,8 @@ font.pointSize: 16
 
 
 JoyStick{
+    x:600
+    y:10
 }
 
 

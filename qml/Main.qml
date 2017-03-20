@@ -7,8 +7,12 @@ import "scenes/levels"
 GameWindow {
     id: gameWindow
     menuBarVPlayEnabled: false
-    height: 768
-    width: 1024
+    maximumHeight: 768
+    minimumHeight: 768
+    maximumWidth: 1024
+    minimumWidth: 1024
+    screenHeight: 768
+    screenWidth: 1024
     EntityManager {
       id: entityManager
     }

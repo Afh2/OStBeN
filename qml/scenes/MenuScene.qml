@@ -3,6 +3,25 @@ import QtQuick 2.0
 import "../common"
 
 Scene {
+
+    AnimatedImage{
+    width: 200
+    height: 200
+    x:30
+    y:30
+
+    z:3
+
+        source: "../../assets/img/1.gif"
+ }
+    Image{
+    z:3
+    width: 650
+    height: 650
+    x:310
+    y:55
+    source: "../../assets/img/gr.png"
+    }
     id: beginMenuScene
     signal beginStoryPressed
     signal startPressed
@@ -22,20 +41,21 @@ Scene {
     Image {
         id: ground
         anchors.verticalCenter: parent.verticalCenter
-        fillMode: Image.PreserveAspectCrop
-        source: "../../assets/img/0-background.jpg"
+      fillMode: Image.PreserveAspectFit
+        source: "../../assets/img/0-background.png"
     // background rectangle matching the logical scene size (= safe zone available on all devices)
     // see here for more details on content scaling and safe zone: https://v-play.net/doc/vplay-different-screen-sizes/
     Column {
         anchors.verticalCenter:  parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: 30
         MenuButtonBase {
             text: "Start Story"
             onClicked: beginStoryPressed()
         }
         MenuButtonBase {
             text: "Exit"
+            onClicked: Qt.quit();
         }
         MenuButtonBase {
             text: "Start"
