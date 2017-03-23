@@ -8,31 +8,10 @@ import "../../entities"
 
 SceneBase {
 
-//    Dialog {
-//        id: dialogMT
-//        width: 600
-//        height: 500
-
-
-//        contentItem: Rectangle{
-//        anchors.bottom: parent.bottom
-//        anchors.left: parent.left
-
-//        Text{
-//                   id: text1
-//                   color: "#88053f"
-//                   text: "Hello Traveller!!!)"
-//                   font.pointSize: 16
-//                   font.family: "Arial"
-//                   anchors.centerIn: parent
-//                   z:1
-//                   visible: false
-//               }
-//}}
    id: level01
    opacity: 0
-//   visible: opacity > 0
-//   enabled: visible
+   visible: opacity > 0
+   enabled: visible
 
    PhysicsWorld {
        id: world
@@ -45,10 +24,8 @@ SceneBase {
     z:1
     x: 100
     y: 600
-   // onContact: goToMenu()
    }
 
-   signal goToMenu()
    signal goToDialog()
 
    Beardie{
@@ -56,13 +33,9 @@ SceneBase {
    z:1
    x: 600
    y: 600
- //  onContactOn: goToMenu()
    onContactOn: {
        goToDialog()
-       //text1.visible = true
-  // if (text1.font.pointSize<40) text1.font.pointSize++
    }
-  // onContactEnd: text1.visible= false
    }
 
     focus: true
@@ -81,7 +54,6 @@ JoyStick{
             id: rightCollider
             bodyType: Body.Static
             visible: false
-            fixture.onBeginContact: goToMenu()
         }
 
 

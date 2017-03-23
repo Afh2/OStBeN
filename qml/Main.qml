@@ -38,7 +38,6 @@ GameWindow {
     }
     Level01 {
         id: level01
-        onGoToMenu: gameWindow.state = "menu"
         onGoToDialog: gameWindow.state = "dialog"
     }
     DialogScene{
@@ -80,14 +79,14 @@ GameWindow {
             name: "game0"
             PropertyChanges {target: level00; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: level00}
-//            PropertyChanges {target: entityManager; entityContainer:  level00}
+            PropertyChanges {target: entityManager; entityContainer:  level00}
             PropertyChanges {target: yourNameScene; opacity: 0}
         },
         State {
             name: "game1"
             PropertyChanges {target: level01; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: level01}
-//            PropertyChanges {target: entityManager; entityContainer:  level01}
+            PropertyChanges {target: entityManager; entityContainer:  level01}
             PropertyChanges {target: level00; opacity: 0}
         },
         State {

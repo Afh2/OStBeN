@@ -11,23 +11,25 @@ SceneBase {
 
    id: level00
    opacity: 0
-//   visible: opacity > 0
-//   enabled: visible
+   visible: opacity > 0
+   enabled: visible
 
    PhysicsWorld {
        id: world
      updatesPerSecondForPhysics: 30
    }
-   Keys.forwardTo: mt0.to_tac
+   Keys.forwardTo: mt.to_tac
 
    MT {
-    id: mt0
+    id: mt
     z:1
     x: 100
     y: 600
    }
 
    signal goToNextLevel()
+
+
 
 JoyStick{
 }
@@ -39,7 +41,9 @@ JoyStick{
             id: rightCollider
             bodyType: Body.Static
             visible: false
-            fixture.onBeginContact: goToNextLevel()
+            fixture.onBeginContact: {
+            goToNextLevel()
+            }
         }
 
 

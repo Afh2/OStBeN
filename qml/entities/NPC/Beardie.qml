@@ -45,12 +45,12 @@ EntityBase {
         frameRate: 3
         frameCount: 3 //Количество кадров
         width: 26 //Ширина окна
-        height: 32
-        frameHeight: 32 //Высота выреза файла
+        height: 40
+        frameHeight: 36 //Высота выреза файла
         frameWidth: 31  //Ширина выреза файла
-        frameX: 38 //С чего начинать обрезку файла
-        frameY: 19
-        source: "../../../assets/sprites/chibi.png"
+        frameX: 1 //С чего начинать обрезку файла
+        frameY: 10
+        source: "../../../assets/sprites/tuxedokamen.png"
 
         }
 }
