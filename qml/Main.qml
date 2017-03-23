@@ -24,18 +24,26 @@ GameWindow {
     MenuScene {
         id: beginMenuScene
         onBeginStoryPressed: gameWindow.state = "yourname"
-        onStartPressed: gameWindow.state = "game"
+        onStartPressed: gameWindow.state = "game1"
         onDialogPressed: gameWindow.state = "dialog"
     }
     YourNameScene {
         id: yourNameScene
         onBackToMenuPressed: gameWindow.state = "menu"
+        onGoNextPressed: gameWindow.state = "game0"
     }
     Level00 {
         id: level00
+        onGoToNextLevel: gameWindow.state = "game1"
+    }
+    Level01 {
+        id: level01
+        onGoToMenu: gameWindow.state = "menu"
+        onGoToDialog: gameWindow.state = "dialog"
     }
     DialogScene{
     id: dialogScene
+    onBackToMenuPressed: gameWindow.state = "menu"
     }
     // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
     // the content of the logical scene size (480x320 for landscape mode by default) gets scaled to the window size based on the scaleMode
@@ -59,19 +67,28 @@ GameWindow {
             name: "yourname"
             PropertyChanges {target: yourNameScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: yourNameScene}
+            PropertyChanges {target: beginMenuScene; opacity: 0}
         },
         State {
             name: "menu"
             PropertyChanges {target: beginMenuScene; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: beginMenuScene}
-            PropertyChanges {target: level00; opacity: 0}
+            PropertyChanges {target: level01; opacity: 0}
         },
+
         State {
-            name: "game"
+            name: "game0"
             PropertyChanges {target: level00; opacity: 1}
             PropertyChanges {target: gameWindow; activeScene: level00}
-            PropertyChanges {target: entityManager; entityContainer:  level00}
-            PropertyChanges {target: beginMenuScene; opacity: 0}
+//            PropertyChanges {target: entityManager; entityContainer:  level00}
+            PropertyChanges {target: yourNameScene; opacity: 0}
+        },
+        State {
+            name: "game1"
+            PropertyChanges {target: level01; opacity: 1}
+            PropertyChanges {target: gameWindow; activeScene: level01}
+//            PropertyChanges {target: entityManager; entityContainer:  level01}
+            PropertyChanges {target: level00; opacity: 0}
         },
         State {
             name: "dialog"

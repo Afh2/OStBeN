@@ -8,8 +8,28 @@ import "../../entities"
 
 SceneBase {
 
+//    Dialog {
+//        id: dialogMT
+//        width: 600
+//        height: 500
 
-   id: level00
+
+//        contentItem: Rectangle{
+//        anchors.bottom: parent.bottom
+//        anchors.left: parent.left
+
+//        Text{
+//                   id: text1
+//                   color: "#88053f"
+//                   text: "Hello Traveller!!!)"
+//                   font.pointSize: 16
+//                   font.family: "Arial"
+//                   anchors.centerIn: parent
+//                   z:1
+//                   visible: false
+//               }
+//}}
+   id: level01
    opacity: 0
 //   visible: opacity > 0
 //   enabled: visible
@@ -18,28 +38,50 @@ SceneBase {
        id: world
      updatesPerSecondForPhysics: 30
    }
-   Keys.forwardTo: mt0.to_tac
+   Keys.forwardTo: mt.to_tac
 
    MT {
-    id: mt0
+    id: mt
     z:1
     x: 100
     y: 600
+   // onContact: goToMenu()
    }
 
-   signal goToNextLevel()
+   signal goToMenu()
+   signal goToDialog()
+
+   Beardie{
+   id: beardie
+   z:1
+   x: 600
+   y: 600
+ //  onContactOn: goToMenu()
+   onContactOn: {
+       goToDialog()
+       //text1.visible = true
+  // if (text1.font.pointSize<40) text1.font.pointSize++
+   }
+  // onContactEnd: text1.visible= false
+   }
+
+    focus: true
+
+
 
 JoyStick{
 }
 
+
+
         BoxCollider {
             anchors.right: parent.right
             height: parent.height
-            width: 31
+            width: 0,1
             id: rightCollider
             bodyType: Body.Static
             visible: false
-            fixture.onBeginContact: goToNextLevel()
+            fixture.onBeginContact: goToMenu()
         }
 
 

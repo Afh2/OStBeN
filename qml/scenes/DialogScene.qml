@@ -8,6 +8,7 @@ import "../common"
 
 SceneBase {
    opacity: 0
+signal backToMenuPressed
 
    Rectangle{
        id: vertLine
@@ -27,7 +28,7 @@ SceneBase {
    color: "black"
    }
 
-Rectangle{
+Rectangle{  // окно где отображается сам диалог
     id: dialRect
     anchors.left: vertLine.right
     anchors.right: parent.right
@@ -37,8 +38,9 @@ Rectangle{
 
     Text {
         id: dialogText
-        text: "Эй, ты там! Да, ты! Не хочешь посмотреть маленькое представление кукольного театра? За символическую сцену ты, путник, увидишь
-представление оживших кукол дона Бородача.\n \n"
+        text: "Эй, ты там! Да, ты! Не хочешь посмотреть маленькое представление кукольного театра? За символическую цену ты, путник, увидишь представление оживших кукол дона Бородача.\n \n"
+        font.pixelSize: 20
+        wrapMode : Text.WordWrap
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 20
@@ -49,7 +51,7 @@ Rectangle{
 
 }
 
-Rectangle{
+Rectangle{   // окно выбора ответа
     id: varAnswerRect
     anchors.left: vertLine.right
     anchors.right: parent.right
@@ -108,8 +110,7 @@ Column {
     MenuButtonBase{
     id: var15
     text: "Представьтесь вначале!"
-    onClicked: {dialogText.text += "ГГ: Представьтесь вначале!\n \nNPC: Я - дон Бородач. Мои кукольные представления известны в городе и за его пределами. Вы будете очарованы моими ожившими куклами и их
-маленькими пьесками.\n \n"
+    onClicked: {dialogText.text += "ГГ: Представьтесь вначале!\n \nNPC: Я - дон Бородач. Мои кукольные представления известны в городе и за его пределами. Вы будете очарованы моими ожившими куклами и их маленькими пьесками.\n \n"
     krug0.destroy()
     loader.sourceComponent = krug24}
     }
@@ -178,8 +179,7 @@ Column {
     MenuButtonBase{
     id: var224
     text: "Представьтесь вначале!"
-    onClicked: {dialogText.text += "ГГ: Представьтесь вначале!\n \nNPC: Я - дон Бородач. Мои кукольные представления известны в городе и за его пределами. Вы будете очарованы моими ожившими куклами и их
-маленькими пьесками.\n \n"
+    onClicked: {dialogText.text += "ГГ: Представьтесь вначале!\n \nNPC: Я - дон Бородач. Мои кукольные представления известны в городе и за его пределами. Вы будете очарованы моими ожившими куклами и их маленькими пьесками.\n \n"
     krug0.destroy()
     loader.sourceComponent = krug22}
     }
@@ -329,15 +329,22 @@ Component{
 
 
 
-Rectangle{
+Rectangle{   // левая сторона игрового окна
     id: leftSideRect
     anchors.left: parent.left
     anchors.right: vertLine.left
     anchors.top: parent.top
     anchors.bottom: parent.bottom
     color: "#9a9ace"
+
+
+    MenuButtonBase{
+    anchors.top: parent.top
+    anchors.topMargin: 20
+    anchors.left: parent.left
+    anchors.leftMargin: 5
+    text: "Menu"
+    onClicked: backToMenuPressed()
 }
-
-
-
+}
 }
